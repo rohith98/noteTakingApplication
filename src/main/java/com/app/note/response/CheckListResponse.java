@@ -1,22 +1,11 @@
-package com.app.note.entity;
+package com.app.note.response;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name="lists")
-public class List {
-    @Id
-    @Column(name="list_id")
-    private Integer listId;
-
-    @Column(name="title_id")
-    private Integer titleId;
-
-    @Column(name="list")
+public class CheckListResponse {
     private String listName;
 
-    @Column(name="boolean")
     private Integer bool;
+
+    private Integer listId;
 
     public Integer getListId() {
         return listId;
@@ -24,14 +13,6 @@ public class List {
 
     public void setListId(Integer listId) {
         this.listId = listId;
-    }
-
-    public Integer getTitleId() {
-        return titleId;
-    }
-
-    public void setTitleId(Integer titleId) {
-        this.titleId = titleId;
     }
 
     public String getListName() {

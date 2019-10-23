@@ -1,5 +1,6 @@
 package com.app.note.request;
 
+import com.app.note.entity.CheckList;
 import com.app.note.entity.Note;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class TitleRequest {
 
     private List<Note> notes;
 
-    private List<com.app.note.entity.List> lists;
+    private List<CheckList> lists;
 
     public Integer getTitleId() {
         return titleId;
@@ -47,11 +48,11 @@ public class TitleRequest {
         this.notes = notes;
     }
 
-    public List<com.app.note.entity.List> getLists() {
+    public List<CheckList> getLists() {
         return lists;
     }
 
-    public void setLists(List<com.app.note.entity.List> lists) {
+    public void setLists(List<CheckList> lists) {
         this.lists = lists;
     }
 }

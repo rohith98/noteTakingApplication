@@ -11,19 +11,16 @@ public class Group {
     @Column(name="group_id")
     private Integer groupId;
 
-    @Column(name="user_id")
-    private Integer userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+    private User user;
 
     @Column(name="group_name")
     private String groupName;
 
-    @OneToMany
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true )
     @JoinColumn(name = "group_id")
     private List<Title> titles;
-
-//    @ManyToOne(fetch=FetchType.LAZY)
-//    @JoinColumn(name="user_id")
-//    private User user;
 
     public Integer getGroupId() {
         return groupId;
@@ -33,12 +30,12 @@ public class Group {
         this.groupId = groupId;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getGroupName() {
@@ -48,14 +45,6 @@ public class Group {
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
-
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
 
     public List<Title> getTitles() {
         return titles;

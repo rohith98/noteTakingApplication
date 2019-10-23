@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping({"/user"})
 public class UserController {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
 //    @PostMapping("/find")
 //    public UserResponse fetchUser(@RequestBody UserRequest userRequest){
@@ -24,19 +24,18 @@ public class UserController {
 //    }
 
     @PostMapping("/login")
-    public String loginUser(@RequestBody UserRequest userRequest){
-        return userService.loginUser(userRequest);
+    public UserResponse loginUser(@RequestBody UserRequest userRequest, HttpServletResponse response){
+        return userService.loginUser(userRequest, response);
     }
 
     @PostMapping("/register")
     public String registerUser(@RequestBody UserRequest userRequest, HttpServletResponse response){
-        String responseString;
-
-        responseString = userService.registerUser(userRequest);
-        if(responseString.equals("Registered Successfully")){
-            response.setStatus(201);
+        userService.registerUser(userRequest, response);
+        if(response.getStatus()==HttpServletResponse.SC_CREATED){
+            return "User Created Successfully";
         }
-
-        return responseString;
+        else{
+            return "User Already Exist";
+        }
     }
 }

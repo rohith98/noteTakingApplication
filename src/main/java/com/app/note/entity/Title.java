@@ -7,22 +7,24 @@ import java.util.List;
 @Table(name="titles")
 public class Title {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="title_id")
     private Integer titleId;
 
-    @Column(name="group_id")
-    private Integer groupId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="group_id")
+    private Group group;
 
     @Column(name="title_name")
     private String titleName;
     
-    @OneToMany
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true )
     @JoinColumn(name = "title_id")
     private List<Note> notes;
 
-    @OneToMany
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true )
     @JoinColumn(name = "title_id")
-    private List<com.app.note.entity.List> lists;
+    private List<CheckList> lists;
 
     public Integer getTitleId() {
         return titleId;
@@ -32,12 +34,12 @@ public class Title {
         this.titleId = titleId;
     }
 
-    public Integer getGroupId() {
-        return groupId;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setGroupId(Integer groupId) {
-        this.groupId = groupId;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public String getTitleName() {
@@ -56,11 +58,11 @@ public class Title {
         this.notes = notes;
     }
 
-    public List<com.app.note.entity.List> getLists() {
+    public List<CheckList> getLists() {
         return lists;
     }
 
-    public void setLists(List<com.app.note.entity.List> lists) {
+    public void setLists(List<CheckList> lists) {
         this.lists = lists;
     }
 }

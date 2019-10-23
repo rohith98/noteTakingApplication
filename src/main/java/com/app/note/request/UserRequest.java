@@ -1,19 +1,9 @@
 package com.app.note.request;
 
 public class UserRequest {
-//    private Integer userId;
-
     private String userName;
 
     private String password;
-
-//    public Integer getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(Integer userId) {
-//        this.userId = userId;
-//    }
 
     public String getUserName() {
         return userName;

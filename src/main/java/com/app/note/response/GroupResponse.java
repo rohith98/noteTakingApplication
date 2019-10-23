@@ -1,23 +1,18 @@
 package com.app.note.response;
 
-import com.app.note.entity.Title;
-
-import java.util.List;
-
 public class GroupResponse {
-//    private Integer userId;
+
+    private Integer groupId;
 
     private String groupName;
 
-//    private List<Title> titles;
+    public Integer getGroupId() {
+        return groupId;
+    }
 
-//    public Integer getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(Integer userId) {
-//        this.userId = userId;
-//    }
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
+    }
 
     public String getGroupName() {
         return groupName;
@@ -27,11 +22,4 @@ public class GroupResponse {
         this.groupName = groupName;
     }
 
-//    public List<Title> getTitles() {
-////        return titles;
-////    }
-////
-////    public void setTitles(List<Title> titles) {
-////        this.titles = titles;
-////    }
 }
