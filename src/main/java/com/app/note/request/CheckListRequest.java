@@ -7,7 +7,7 @@ public class CheckListRequest {
 
     private String listName;
 
-    private Integer bool;
+    private Integer checkBox;
 
     public Integer getTitleId() {
         return titleId;
@@ -25,12 +25,12 @@ public class CheckListRequest {
         this.listName = listName;
     }
 
-    public Integer getBool() {
-        return bool;
+    public Integer getCheckBox() {
+        return checkBox;
     }
 
-    public void setBool(Integer bool) {
-        this.bool = bool;
+    public void setCheckBox(Integer checkBox) {
+        this.checkBox = checkBox;
     }
 
     public Integer getListId() {

@@ -1,5 +1,6 @@
 package com.app.note.controller;
 
+import com.app.note.entity.Group;
 import com.app.note.request.GroupRequest;
 import com.app.note.response.GroupResponse;
 import com.app.note.service.GroupService;
@@ -51,5 +52,10 @@ public class GroupController {
         else{
             return "Error Deleting Group";
         }
+    }
+
+    @GetMapping(("/search/{search}"))
+    public List<GroupResponse> searchByName(@PathVariable("search") String search){
+        return groupService.searchByName(search);
     }
 }

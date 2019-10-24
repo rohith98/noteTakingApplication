@@ -8,23 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.Response;
 import java.util.Optional;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-
-//    public UserResponse fetchUser(Integer userId) {
-//        UserResponse userResponse = new UserResponse();
-//        Optional<User> user=userRepository.findById(userId);
-//        if(user.isPresent()) {
-//            userResponse.setUserName(user.get().getUserName());
-//            userResponse.setPassword(user.get().getPassword());
-//            userResponse.setGroups(user.get().getGroups());
-//        }
-//        return userResponse;
-//    }
 
     public void registerUser(UserRequest userRequest, HttpServletResponse response){
         if(userRepository.findByUserName(userRequest.getUserName())==null){
@@ -42,8 +32,14 @@ public class UserService {
         UserResponse userResponse = new UserResponse();
         if(user.isPresent()){
             userResponse.setUserId(user.get().getUserId());
+            userResponse.setUserName(user.get().getUserName());
+            userResponse.setStatus("Success");
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
             return userResponse;
+        }
+        else{
+            userResponse.setStatus("Invalid Credentials");
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
         return userResponse;
     }

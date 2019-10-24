@@ -10,11 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class GroupService {
@@ -84,5 +82,31 @@ public class GroupService {
             logger.error(e.getMessage());
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
+    }
+
+    public List<GroupResponse> searchByName(String search){
+        List<GroupResponse> groupResponses = new ArrayList<>();
+        try{
+            List<Group> groups = groupRepository.findByName(search);
+            for(Group group: groups) {
+                GroupResponse groupResponse = new GroupResponse();
+                groupResponse.setGroupId(group.getGroupId());
+                groupResponse.setGroupName(group.getGroupName());
+                groupResponses.add(groupResponse);
+            }
+/*
+            List<Object[]> groups = groupRepository.findByName(search);
+            for(Object[] group: groups) {
+                GroupResponse groupResponse = new GroupResponse();
+                groupResponse.setGroupId((Integer) group[0]);
+                groupResponse.setGroupName((String) group[1]);
+                groupResponses.add(groupResponse);
+            }
+*/
+        }
+        catch (Exception e){
+            logger.error(e.getMessage());
+        }
+        return groupResponses;
     }
 }

@@ -1,11 +1,11 @@
 package com.app.note.response;
 
 public class CheckListResponse {
+    private Integer listId;
+
     private String listName;
 
-    private Integer bool;
-
-    private Integer listId;
+    private Integer checkBox;
 
     public Integer getListId() {
         return listId;
@@ -23,11 +23,11 @@ public class CheckListResponse {
         this.listName = listName;
     }
 
-    public Integer getBool() {
-        return bool;
+    public Integer getCheckBox() {
+        return checkBox;
     }
 
-    public void setBool(Integer bool) {
-        this.bool = bool;
+    public void setCheckBox(Integer checkBox) {
+        this.checkBox = checkBox;
     }
 }

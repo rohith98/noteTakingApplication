@@ -84,4 +84,21 @@ public class TitleService {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
     }
+
+    public List<TitleResponse> searchByName(String search){
+        List<TitleResponse> titleResponses =  new ArrayList<>();
+        try{
+            List<Title> titles = titleRepository.findByName(search);
+            for(Title title: titles){
+                TitleResponse titleResponse = new TitleResponse();
+                titleResponse.setTitleId(title.getTitleId());
+                titleResponse.setTitleName(title.getTitleName());
+                titleResponses.add(titleResponse);
+            }
+        }
+        catch (Exception e){
+            logger.error(e.getMessage());
+        }
+        return titleResponses;
+    }
 }

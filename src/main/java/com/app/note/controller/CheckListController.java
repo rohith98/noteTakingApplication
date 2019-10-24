@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
-@RequestMapping("/list")
+@RequestMapping("/checklist")
 public class CheckListController {
     @Autowired
     private CheckListService checkListService;

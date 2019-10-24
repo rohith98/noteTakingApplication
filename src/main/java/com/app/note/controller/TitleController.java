@@ -54,4 +54,9 @@ public class TitleController {
             return "Error Deleting Title";
         }
     }
+
+    @GetMapping(("/search/{search}"))
+    public List<TitleResponse> searchByName(@PathVariable("search") String search){
+        return titleService.searchByName(search);
+    }
 }

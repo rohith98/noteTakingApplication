@@ -34,7 +34,7 @@ public class CheckListService {
                 CheckListResponse checkListResponse = new CheckListResponse();
                 checkListResponse.setListId(list.getListId());
                 checkListResponse.setListName(list.getListName());
-                checkListResponse.setBool(list.getBool());
+                checkListResponse.setCheckBox(list.getCheckBox());
                 checkListResponses.add(checkListResponse);
             }
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
@@ -52,7 +52,7 @@ public class CheckListService {
             CheckList list = new CheckList();
             list.setTitle(title);
             list.setListName(checkListRequest.getListName());
-            list.setBool(checkListRequest.getBool());
+            list.setCheckBox(checkListRequest.getCheckBox());
             checkListRepository.save(list);
             response.setStatus(HttpServletResponse.SC_CREATED);
         }
@@ -67,7 +67,7 @@ public class CheckListService {
             CheckList list = new CheckList();
             list.setListId(checkListRequest.getListId());
             list.setListName(checkListRequest.getListName());
-            list.setBool(checkListRequest.getBool());
+            list.setCheckBox(checkListRequest.getCheckBox());
             checkListRepository.save(list);
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
             return "CheckList Updated Successfully";

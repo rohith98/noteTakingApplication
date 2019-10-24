@@ -3,6 +3,8 @@ package com.app.note.response;
 public class NoteResponse {
     private String message;
 
+    private Integer noteId;
+
     public Integer getNoteId() {
         return noteId;
     }
@@ -10,8 +12,6 @@ public class NoteResponse {
     public void setNoteId(Integer noteId) {
         this.noteId = noteId;
     }
-
-    private Integer noteId;
 
     public String getMessage() {
         return message;

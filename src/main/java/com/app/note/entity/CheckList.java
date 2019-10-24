@@ -18,7 +18,7 @@ public class CheckList {
     private String listName;
 
     @Column(name="boolean")
-    private Integer bool;
+    private Integer checkBox;
 
     public Integer getListId() {
         return listId;
@@ -44,11 +44,11 @@ public class CheckList {
         this.listName = listName;
     }
 
-    public Integer getBool() {
-        return bool;
+    public Integer getCheckBox() {
+        return checkBox;
     }
 
-    public void setBool(Integer bool) {
-        this.bool = bool;
+    public void setCheckBox(Integer checkBox) {
+        this.checkBox = checkBox;
     }
 }

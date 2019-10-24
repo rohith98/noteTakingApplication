@@ -12,14 +12,6 @@ public class TitleResponse {
     public void setTitleId(Integer titleId) {
         this.titleId = titleId;
     }
-//
-//    public Integer getGroupId() {
-//        return groupId;
-//    }
-//
-//    public void setGroupId(Integer groupId) {
-//        this.groupId = groupId;
-//    }
 
     public String getTitleName() {
         return titleName;
@@ -29,19 +21,4 @@ public class TitleResponse {
         this.titleName = titleName;
     }
 
-//    public CheckList<Note> getNotes() {
-//        return notes;
-//    }
-//
-//    public void setNotes(CheckList<Note> notes) {
-//        this.notes = notes;
-//    }
-//
-//    public CheckList<com.app.note.entity.CheckList> getLists() {
-//        return lists;
-//    }
-//
-//    public void setLists(CheckList<com.app.note.entity.CheckList> lists) {
-//        this.lists = lists;
-//    }
 }

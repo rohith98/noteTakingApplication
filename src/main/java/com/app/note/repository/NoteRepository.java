@@ -7,11 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface NoteRepository extends JpaRepository<Note, Integer> {
     Note findByTitle(Title title);
-
-//   @Query("select n from Note n where n.titleId = :titleId")
-//    Note findByTitleId(@Param("titleId") Title titleId);
 
 }
