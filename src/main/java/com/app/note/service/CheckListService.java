@@ -46,7 +46,7 @@ public class CheckListService {
         return checkListResponses;
     }
 
-    public void createList(CheckListRequest checkListRequest, HttpServletResponse response){
+    public String createList(CheckListRequest checkListRequest, HttpServletResponse response){
         try{
             Title title = titleRepository.findById(checkListRequest.getTitleId()).orElseThrow(()-> new Exception("Title Not Found"));
             CheckList list = new CheckList();
@@ -55,17 +55,18 @@ public class CheckListService {
             list.setCheckBox(checkListRequest.getCheckBox());
             checkListRepository.save(list);
             response.setStatus(HttpServletResponse.SC_CREATED);
+            return "Check List Created Successfully ";
         }
         catch (Exception e){
             logger.error(e.getMessage());
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return "Error Creating Check List";
         }
     }
 
     public String updateList(CheckListRequest checkListRequest, HttpServletResponse response){
         try{
-            CheckList list = new CheckList();
-            list.setListId(checkListRequest.getListId());
+            CheckList list = checkListRepository.findById(checkListRequest.getListId()).orElseThrow(()->new Exception("Check List Not Found"));
             list.setListName(checkListRequest.getListName());
             list.setCheckBox(checkListRequest.getCheckBox());
             checkListRepository.save(list);
@@ -74,7 +75,8 @@ public class CheckListService {
         }
         catch (Exception e){
             logger.error(e.getMessage());
-            return e.getMessage();
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return e.getMessage()+", Error Updating Check List";
         }
     }
 }

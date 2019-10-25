@@ -21,12 +21,6 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUser(@RequestBody UserRequest userRequest, HttpServletResponse response){
-        userService.registerUser(userRequest, response);
-        if(response.getStatus()==HttpServletResponse.SC_CREATED){
-            return "User Created Successfully";
-        }
-        else{
-            return "User Already Exist";
-        }
+        return userService.registerUser(userRequest, response);
     }
 }

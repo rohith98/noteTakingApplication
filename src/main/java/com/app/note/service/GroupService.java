@@ -45,7 +45,7 @@ public class GroupService {
         return groupResponses;
     }
 
-    public void createGroup(GroupRequest groupRequest, HttpServletResponse response){
+    public String createGroup(GroupRequest groupRequest, HttpServletResponse response){
         try{
             User user = userRepository.findById(groupRequest.getUserId()).orElseThrow(()->new Exception("User Not Found"));
             Group group = new Group();
@@ -53,34 +53,40 @@ public class GroupService {
             group.setGroupName(groupRequest.getGroupName());
             groupRepository.save(group);
             response.setStatus(HttpServletResponse.SC_CREATED);
+            return "Group Created Successfully ";
         }
         catch (Exception e){
             logger.error(e.getMessage());
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return "Error Creating Group";
         }
     }
 
-    public void updateGroupName(GroupRequest groupRequest, HttpServletResponse response){
+    public String updateGroupName(GroupRequest groupRequest, HttpServletResponse response){
         try{
             Group group = groupRepository.findById(groupRequest.getGroupId()).orElseThrow(()->new Exception("Group Not Found"));
             group.setGroupName(groupRequest.getGroupName());
             groupRepository.save(group);
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
+            return "Group Updated Successfully ";
         }
         catch (Exception e){
             logger.error(e.getMessage());
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return "Error Updating Group";
         }
     }
 
-    public void deleteGroup(Integer groupId, HttpServletResponse response){
+    public String deleteGroup(Integer groupId, HttpServletResponse response){
         try{
             groupRepository.deleteById(groupId);
             response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            return "Group Deleted Successfully ";
         }
         catch (Exception e){
             logger.error(e.getMessage());
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return "Error Deleting Group";
         }
     }
 
@@ -94,15 +100,6 @@ public class GroupService {
                 groupResponse.setGroupName(group.getGroupName());
                 groupResponses.add(groupResponse);
             }
-/*
-            List<Object[]> groups = groupRepository.findByName(search);
-            for(Object[] group: groups) {
-                GroupResponse groupResponse = new GroupResponse();
-                groupResponse.setGroupId((Integer) group[0]);
-                groupResponse.setGroupName((String) group[1]);
-                groupResponses.add(groupResponse);
-            }
-*/
         }
         catch (Exception e){
             logger.error(e.getMessage());

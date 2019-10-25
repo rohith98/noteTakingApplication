@@ -22,21 +22,24 @@ public class NoteService {
 
     private static Logger logger = LoggerFactory.getLogger(NoteService.class);
 
-    public NoteResponse fetchNote(Integer titleId){
+    public NoteResponse fetchNote(Integer titleId, HttpServletResponse response){
         NoteResponse noteResponse = new NoteResponse();
         try{
             Title title = titleRepository.findById(titleId).orElseThrow(()-> new Exception("Title Note Found"));
             Note note = noteRepository.findByTitle(title);
             noteResponse.setNoteId(note.getNoteId());
             noteResponse.setMessage(note.getMessage());
+            response.setStatus(HttpServletResponse.SC_ACCEPTED);
         }
         catch (Exception e){
             logger.error(e.getMessage());
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+
         }
         return noteResponse;
     }
 
-    public void createNote(NoteRequest noteRequest, HttpServletResponse response){
+    public String createNote(NoteRequest noteRequest, HttpServletResponse response){
         try{
             Title title = titleRepository.findById(noteRequest.getTitleId()).orElseThrow(()-> new Exception("Title Not Found"));
             Note note = new Note();
@@ -44,17 +47,18 @@ public class NoteService {
             note.setMessage(noteRequest.getMessage());
             noteRepository.save(note);
             response.setStatus(HttpServletResponse.SC_CREATED);
+            return "Note Created Successfully ";
         }
         catch (Exception e){
             logger.error(e.getMessage());
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return "Error Creating Note";
         }
     }
 
     public String updateNote(NoteRequest noteRequest, HttpServletResponse response){
         try{
-            Note note = new Note();
-            note.setNoteId(noteRequest.getNoteId());
+            Note note = noteRepository.findById(noteRequest.getNoteId()).orElseThrow(()->new Exception("Note Not Found"));
             note.setMessage(noteRequest.getMessage());
             noteRepository.save(note);
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
@@ -62,7 +66,8 @@ public class NoteService {
         }
         catch (Exception e){
             logger.error(e.getMessage());
-            return e.getMessage();
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return e.getMessage()+", Error Updating Note";
         }
     }
 }

@@ -24,35 +24,17 @@ public class TitleController {
 
     @PostMapping
     public String createTitle(@RequestBody TitleRequest titleRequest, HttpServletResponse response){
-        titleService.createTitle(titleRequest, response);
-        if(response.getStatus()==HttpServletResponse.SC_CREATED){
-            return "Title Created Successfully ";
-        }
-        else{
-            return "Error Creating Title";
-        }
+        return titleService.createTitle(titleRequest, response);
     }
 
     @PutMapping
     public String updateTitleName(@RequestBody TitleRequest titleRequest, HttpServletResponse response){
-        titleService.updateTitleName(titleRequest, response);
-        if(response.getStatus()==HttpServletResponse.SC_ACCEPTED){
-            return "Title Updated Successfully ";
-        }
-        else{
-            return "Error Updating Title";
-        }
+        return titleService.updateTitleName(titleRequest, response);
     }
 
     @DeleteMapping(("/{titleId}"))
     public String deleteTitle(@PathVariable("titleId") Integer titleId, HttpServletResponse response){
-        titleService.deleteTitle(titleId, response);
-        if(response.getStatus()==HttpServletResponse.SC_NO_CONTENT){
-            return "Title Deleted Successfully ";
-        }
-        else{
-            return "Error Deleting Title";
-        }
+        return titleService.deleteTitle(titleId, response);
     }
 
     @GetMapping(("/search/{search}"))

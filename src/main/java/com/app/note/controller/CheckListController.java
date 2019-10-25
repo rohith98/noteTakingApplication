@@ -22,13 +22,7 @@ public class CheckListController {
 
     @PostMapping
     public String createList(@RequestBody CheckListRequest checkListRequest, HttpServletResponse response){
-         checkListService.createList(checkListRequest,response);
-         if(response.getStatus()==HttpServletResponse.SC_CREATED){
-             return "Check List Created Successfully ";
-         }
-         else{
-             return "Error Creating Check List";
-         }
+         return checkListService.createList(checkListRequest,response);
     }
 
     @PutMapping

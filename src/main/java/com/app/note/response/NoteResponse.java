@@ -1,9 +1,10 @@
 package com.app.note.response;
 
 public class NoteResponse {
+    private Integer noteId;
+
     private String message;
 
-    private Integer noteId;
 
     public Integer getNoteId() {
         return noteId;

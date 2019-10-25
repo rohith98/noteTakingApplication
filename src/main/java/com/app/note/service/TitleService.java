@@ -46,7 +46,7 @@ public class TitleService {
         return titleResponses;
     }
 
-    public void createTitle(TitleRequest titleRequest, HttpServletResponse response){
+    public String createTitle(TitleRequest titleRequest, HttpServletResponse response){
         try{
             Group group = groupRepository.findById(titleRequest.getGroupId()).orElseThrow(()-> new Exception("Group Not Found"));
             Title title = new Title();
@@ -54,34 +54,40 @@ public class TitleService {
             title.setTitleName(titleRequest.getTitleName());
             titleRepository.save(title);
             response.setStatus(HttpServletResponse.SC_CREATED);
+            return "Title Created Successfully ";
         }
         catch (Exception e){
             logger.error(e.getMessage());
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return "Error Creating Title";
         }
     }
 
-    public void updateTitleName(TitleRequest titleRequest,HttpServletResponse response){
+    public String updateTitleName(TitleRequest titleRequest,HttpServletResponse response){
         try{
             Title title = titleRepository.findById(titleRequest.getTitleId()).orElseThrow(()-> new Exception("Title Not Found"));
             title.setTitleName(titleRequest.getTitleName());
             titleRepository.save(title);
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
+            return "Title Updated Successfully ";
         }
         catch (Exception e){
             logger.error(e.getMessage());
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return "Error Updating Title";
         }
     }
 
-    public void deleteTitle(Integer titleId, HttpServletResponse response){
+    public String deleteTitle(Integer titleId, HttpServletResponse response){
         try{
             titleRepository.deleteById(titleId);
             response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            return "Title Deleted Successfully ";
         }
         catch (Exception e){
             logger.error(e.getMessage());
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return "Error Deleting Title";
         }
     }
 

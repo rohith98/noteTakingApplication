@@ -23,35 +23,17 @@ public class GroupController {
 
     @PostMapping
     public String createGroup(@RequestBody GroupRequest groupRequest,  HttpServletResponse response){
-        groupService.createGroup(groupRequest, response);
-        if(response.getStatus()==HttpServletResponse.SC_CREATED){
-            return "Group Created Successfully ";
-        }
-        else{
-            return "Error Creating Group";
-        }
+        return groupService.createGroup(groupRequest, response);
     }
 
     @PutMapping
     public String updateGroupName(@RequestBody GroupRequest groupRequest,  HttpServletResponse response){
-        groupService.updateGroupName(groupRequest, response);
-        if(response.getStatus()==HttpServletResponse.SC_ACCEPTED){
-            return "Group Updated Successfully ";
-        }
-        else{
-            return "Error Updating Group";
-        }
+        return groupService.updateGroupName(groupRequest, response);
     }
 
     @DeleteMapping(("/{groupId}"))
     public String deleteGroup(@PathVariable("groupId") Integer groupId,  HttpServletResponse response){
-        groupService.deleteGroup(groupId, response);
-        if(response.getStatus()==HttpServletResponse.SC_NO_CONTENT){
-            return "Group Deleted Successfully ";
-        }
-        else{
-            return "Error Deleting Group";
-        }
+        return groupService.deleteGroup(groupId, response);
     }
 
     @GetMapping(("/search/{search}"))

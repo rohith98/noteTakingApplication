@@ -16,13 +16,17 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public void registerUser(UserRequest userRequest, HttpServletResponse response){
+    public String registerUser(UserRequest userRequest, HttpServletResponse response){
         if(userRepository.findByUserName(userRequest.getUserName())==null){
             User user = new User();
             user.setUserName(userRequest.getUserName());
             user.setPassword(userRequest.getPassword());
             userRepository.save(user);
             response.setStatus(HttpServletResponse.SC_CREATED);
+            return "User Created Successfully";
+        }
+        else{
+            return "User Already Exist";
         }
     }
 
