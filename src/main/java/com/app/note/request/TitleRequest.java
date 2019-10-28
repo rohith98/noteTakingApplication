@@ -12,9 +12,6 @@ public class TitleRequest {
 
     private String titleName;
 
-    private List<Note> notes;
-
-    private List<CheckList> lists;
 
     public Integer getTitleId() {
         return titleId;
@@ -38,21 +35,5 @@ public class TitleRequest {
 
     public void setTitleName(String titleName) {
         this.titleName = titleName;
-    }
-
-    public List<Note> getNotes() {
-        return notes;
-    }
-
-    public void setNotes(List<Note> notes) {
-        this.notes = notes;
-    }
-
-    public List<CheckList> getLists() {
-        return lists;
-    }
-
-    public void setLists(List<CheckList> lists) {
-        this.lists = lists;
     }
 }

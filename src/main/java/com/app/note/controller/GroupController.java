@@ -39,4 +39,9 @@ public class GroupController {
     public List<GroupResponse> searchByName(@PathVariable("search") String search){
         return groupService.searchByName(search);
     }
+
+    @GetMapping(("/searchAll/{search}"))
+    public List<GroupResponse> searchAll(@PathVariable("search") String search){
+        return groupService.searchAll(search);
+    }
 }

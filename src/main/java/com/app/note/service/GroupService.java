@@ -93,7 +93,24 @@ public class GroupService {
     public List<GroupResponse> searchByName(String search){
         List<GroupResponse> groupResponses = new ArrayList<>();
         try{
-            List<Group> groups = groupRepository.findByName(search);
+            List<Group> groups = groupRepository.searchByName(search);
+            for(Group group: groups) {
+                GroupResponse groupResponse = new GroupResponse();
+                groupResponse.setGroupId(group.getGroupId());
+                groupResponse.setGroupName(group.getGroupName());
+                groupResponses.add(groupResponse);
+            }
+        }
+        catch (Exception e){
+            logger.error(e.getMessage());
+        }
+        return groupResponses;
+    }
+
+    public List<GroupResponse> searchAll(String search){
+        List<GroupResponse> groupResponses = new ArrayList<>();
+        try{
+            List<Group> groups = groupRepository.searchAll(search);
             for(Group group: groups) {
                 GroupResponse groupResponse = new GroupResponse();
                 groupResponse.setGroupId(group.getGroupId());

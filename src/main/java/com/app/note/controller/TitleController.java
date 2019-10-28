@@ -41,4 +41,9 @@ public class TitleController {
     public List<TitleResponse> searchByName(@PathVariable("search") String search){
         return titleService.searchByName(search);
     }
+
+    @GetMapping(("/searchAll/{search}"))
+    public List<TitleResponse> searchAll(@PathVariable("search") String search){
+        return titleService.searchAll(search);
+    }
 }

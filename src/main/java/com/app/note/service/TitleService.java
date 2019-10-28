@@ -94,7 +94,24 @@ public class TitleService {
     public List<TitleResponse> searchByName(String search){
         List<TitleResponse> titleResponses =  new ArrayList<>();
         try{
-            List<Title> titles = titleRepository.findByName(search);
+            List<Title> titles = titleRepository.searchByName(search);
+            for(Title title: titles){
+                TitleResponse titleResponse = new TitleResponse();
+                titleResponse.setTitleId(title.getTitleId());
+                titleResponse.setTitleName(title.getTitleName());
+                titleResponses.add(titleResponse);
+            }
+        }
+        catch (Exception e){
+            logger.error(e.getMessage());
+        }
+        return titleResponses;
+    }
+
+    public List<TitleResponse> searchAll(String search){
+        List<TitleResponse> titleResponses =  new ArrayList<>();
+        try{
+            List<Title> titles = titleRepository.searchAll(search);
             for(Title title: titles){
                 TitleResponse titleResponse = new TitleResponse();
                 titleResponse.setTitleId(title.getTitleId());

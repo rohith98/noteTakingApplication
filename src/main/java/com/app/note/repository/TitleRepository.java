@@ -15,6 +15,11 @@ public interface TitleRepository extends JpaRepository<Title, Integer> {
     List<Title> findAllByGroup(Group group);
 
     @Query("SELECT t FROM Title t WHERE t.titleName LIKE %:search%")
-    List<Title> findByName(@Param("search") String search);
+    List<Title> searchByName(@Param("search") String search);
+
+    @Query("SELECT t FROM Title t "
+        +"LEFT JOIN Note n ON n.title.titleId=t.titleId LEFT JOIN CheckList l on l.title.titleId=t.titleId "
+        +"WHERE t.titleName LIKE %:search% OR n.message LIKE %:search% OR l.listName LIKE %:search%")
+    List<Title> searchAll(@Param("search") String search);
 
 }
