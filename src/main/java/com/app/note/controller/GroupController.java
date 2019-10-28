@@ -1,6 +1,5 @@
 package com.app.note.controller;
 
-import com.app.note.entity.Group;
 import com.app.note.request.GroupRequest;
 import com.app.note.response.GroupResponse;
 import com.app.note.service.GroupService;
